@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { collection, query, orderBy, limit, getDocs, where } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import CategoryTabs from '../components/CategoryTabs';
@@ -104,6 +105,7 @@ export default function Home() {
   return (
     <>
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>CampusAI.ng - Nigerian Universities & JAMB Updates</title>
         <meta
           name="description"
@@ -116,11 +118,23 @@ export default function Home() {
         <header className="bg-primary-green text-white shadow-lg">
           <div className="container mx-auto px-4 py-6">
             <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-3xl font-bold mb-2">CampusAI.ng</h1>
-                <p className="text-green-100">
-                  Your AI-powered source for Nigerian university and JAMB updates
-                </p>
+              <div className="flex items-center gap-4">
+                <Link href="/" className="flex-shrink-0">
+                  <Image
+                    src="/logo.png"
+                    alt="CampusAI.ng Logo"
+                    width={60}
+                    height={60}
+                    className="rounded-lg"
+                    priority
+                  />
+                </Link>
+                <div>
+                  <h1 className="text-3xl font-bold mb-2">CampusAI.ng</h1>
+                  <p className="text-green-100">
+                    Your AI-powered source for Nigerian university and JAMB updates
+                  </p>
+                </div>
               </div>
               <nav className="hidden md:flex gap-4">
                 <Link href="/" className="hover:text-primary-gold transition-colors">

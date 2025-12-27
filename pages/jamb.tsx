@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import NewsCard from '../components/NewsCard';
@@ -142,6 +143,7 @@ export default function JAMBPage() {
   return (
     <>
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>JAMB Updates - CampusAI.ng</title>
         <meta
           name="description"
@@ -153,9 +155,20 @@ export default function JAMBPage() {
         {/* Header */}
         <header className="bg-primary-green text-white shadow-lg">
           <div className="container mx-auto px-4 py-6">
-            <Link href="/" className="text-primary-gold hover:underline mb-4 inline-block">
-              ← Back to Home
-            </Link>
+            <div className="flex items-center gap-4 mb-4">
+              <Link href="/" className="flex-shrink-0">
+                <Image
+                  src="/logo.png"
+                  alt="CampusAI.ng Logo"
+                  width={50}
+                  height={50}
+                  className="rounded-lg"
+                />
+              </Link>
+              <Link href="/" className="text-primary-gold hover:underline">
+                ← Back to Home
+              </Link>
+            </div>
             <h1 className="text-4xl font-bold mb-2">JAMB Updates</h1>
             <p className="text-green-100">
               Latest news, circulars, and important dates from the Joint Admissions and Matriculation Board
