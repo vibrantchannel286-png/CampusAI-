@@ -42,6 +42,13 @@ export default function Home() {
 
   const fetchUpdates = async () => {
     try {
+      if (!db) {
+        console.warn('Firebase not initialized. Using sample data.');
+        setUpdates([]);
+        setLoading(false);
+        return;
+      }
+
       const updatesRef = collection(db, 'updates');
       const q = query(updatesRef, orderBy('createdAt', 'desc'), limit(50));
       const querySnapshot = await getDocs(q);
@@ -102,7 +109,6 @@ export default function Home() {
           name="description"
           content="Get the latest updates from Nigerian universities and JAMB. AI-powered summaries of news, announcements, and circulars."
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <div className="min-h-screen bg-gray-50">

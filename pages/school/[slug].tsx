@@ -38,6 +38,13 @@ export default function SchoolPage() {
 
   const fetchUpdates = async (sourceName: string) => {
     try {
+      if (!db) {
+        console.warn('Firebase not initialized.');
+        setUpdates([]);
+        setLoading(false);
+        return;
+      }
+
       const updatesRef = collection(db, 'updates');
       const q = query(
         updatesRef,

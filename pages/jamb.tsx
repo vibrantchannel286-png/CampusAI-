@@ -47,6 +47,19 @@ export default function JAMBPage() {
 
   const fetchUpdates = async () => {
     try {
+      if (!db) {
+        console.warn('Firebase not initialized. Using sample JAMB data.');
+        setUpdates(
+          (jambData as any[]).map((item, index) => ({
+            id: `sample-${index}`,
+            ...item,
+            source: 'JAMB',
+          }))
+        );
+        setLoading(false);
+        return;
+      }
+
       const updatesRef = collection(db, 'updates');
       const q = query(
         updatesRef,
